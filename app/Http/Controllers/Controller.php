@@ -54,7 +54,7 @@ class Controller extends BaseController
             throw new ProcessFailedException($process);
         }
 
-        $process = new Process(['py',$request->file_name]);
+        $process = new Process(['py','new.py',$request->file_name]);
         
         $process->run();
 

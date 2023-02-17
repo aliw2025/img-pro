@@ -1,4 +1,5 @@
 import cv2 as cv2
+import sys
 import numpy as np;
 import skimage
 from numpy import matlib as mb
@@ -35,8 +36,10 @@ def createMask(RGB):
     cv2.waitKey() 
     cv2.destroyAllWindows() 
     return maskedRGBImage
-    
-img = cv2.imread(r'C:\Users\waseem.ali\Downloads\Picture6.png',1); 
+
+
+img = cv2.imread(sys.argv[1],1); 
+
 img2 = createMask(img)  
 
 edged = cv2.Canny(img, 30, 200)
