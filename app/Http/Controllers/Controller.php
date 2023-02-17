@@ -51,7 +51,7 @@ class Controller extends BaseController
         
         $process1->run();
         if (!$process1->isSuccessful()) {
-            throw new ProcessFailedException($process);
+            throw new ProcessFailedException($process1);
         }
 
         $process = new Process(['py','new.py',$request->file_name]);
