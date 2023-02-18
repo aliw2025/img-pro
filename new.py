@@ -13,7 +13,7 @@ def createMask(RGB):
     # print(RGB[:,:,2]);
     # I = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     I = rgb2hsv(img)
-    cv2.imshow('image',I);
+    # cv2.imshow('image',I);
     # print('after');
     # print(I[:,:,0]);
     channel1Min = 0.871;
@@ -31,14 +31,14 @@ def createMask(RGB):
     k = np.tile(~BW,[1 ,1, 3])
     # print(k[:,:,0]);
     np.put(maskedRGBImage,k,0)
-    cv2.imshow('image',maskedRGBImage);
+    # cv2.imshow('image',maskedRGBImage);
 
     cv2.waitKey() 
     cv2.destroyAllWindows() 
     return maskedRGBImage
 
 
-img = cv2.imread(sys.argv[1],1); 
+img = cv2.imread('./storage/app/public/uploads/'+sys.argv[1],1); 
 
 img2 = createMask(img)  
 
@@ -47,7 +47,8 @@ contours, hierarchy = cv2.findContours(edged,
     cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 cv2.drawContours(img, contours, -1, (0,255,0), 3)
 print("Number of Contours found = " + str(len(contours)))
-cv2.imshow('image',img);
+# cv2.imshow('image',img);
+cv2.imwrite('./storage/app/public/uploads/result.png',img);
 cv2.waitKey() 
 cv2.destroyAllWindows() 
 

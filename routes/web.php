@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
 
+
+Route::post('/upload-file', [\App\Http\Controllers\Controller::class,'upload'])->name('upload-file');
+
+Route::get('/home', [\App\Http\Controllers\Controller::class,'home'])->name('home');
 Route::post('/perform-cal', [\App\Http\Controllers\Controller::class,'perfromCal'])->name('perform-cal');
-
 Route::get('/cal', [\App\Http\Controllers\Controller::class,'cal'])->name('cal');
