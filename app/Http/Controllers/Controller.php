@@ -48,7 +48,7 @@ class Controller extends BaseController
        
 
             $request->validate([
-                'file_name' => 'required|max:2048'
+                'file_name' => 'required'
             ]);
            
 
@@ -70,6 +70,7 @@ class Controller extends BaseController
            
         }
     }
+    
     public function perfromCal(Request $request){
             
         $b = "ls";

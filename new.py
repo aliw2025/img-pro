@@ -46,6 +46,38 @@ edged = cv2.Canny(img, 30, 200)
 contours, hierarchy = cv2.findContours(edged, 
     cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 cv2.drawContours(img, contours, -1, (0,255,0), 3)
+
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+ret, img2= cv2.threshold(img2,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+contours2, hierarchy2 = cv2.findContours(edged, 
+    cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+cv2.drawContours(img2, contours2, -1, (0,255,0), 3)
+
+print(contours)
+print(contours2)
+
+cv2.imshow('image',img2);
+cv2.waitKey() 
+# B2 = bwboundaries(img2);
+
+count1 = size(B,1);
+# for i=1:count1
+#     tmp1(i) = size(B{i},1);
+# end
+
+# s = size(B2,1);
+# for i=1:s
+#     tmp2(i) = size(B2{i},1);
+# end
+
+# a = size(tmp1(tmp1>3),2);
+# b = size(tmp2(tmp2>3),2);
+
+
+# %adjustment based on calibration
+# count1 = 100*count1/s;
+# count2 = 135.5*a/(b);
 print("Number of Contours found = " + str(len(contours)))
 # cv2.imshow('image',img);
 cv2.imwrite('./storage/app/public/uploads/result.png',img);
