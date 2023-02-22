@@ -6,16 +6,10 @@ from numpy import matlib as mb
 from skimage.color import rgb2hsv
 
 
-
 def createMask(RGB):
-    # print(RGB[:,:,0]);
-    # print(RGB[:,:,1]);
-    # print(RGB[:,:,2]);
-    # I = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+   
     I = rgb2hsv(img)
-    # cv2.imshow('image',I);
-    # print('after');
-    # print(I[:,:,0]);
+   
     channel1Min = 0.871;
     channel1Max = 0.104;
 
@@ -29,10 +23,9 @@ def createMask(RGB):
     BW = sliderBW;
     maskedRGBImage = RGB;
     k = np.tile(~BW,[1 ,1, 3])
-    # print(k[:,:,0]);
-    np.put(maskedRGBImage,k,0)
-    # cv2.imshow('image',maskedRGBImage);
 
+    np.put(maskedRGBImage,k,0)
+    
     cv2.waitKey() 
     cv2.destroyAllWindows() 
     return maskedRGBImage
@@ -54,35 +47,44 @@ contours2, hierarchy2 = cv2.findContours(edged,
     cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 cv2.drawContours(img2, contours2, -1, (0,255,0), 3)
 
-print(contours)
-print(contours2)
+# print(contours)
+# print(contours2)
 
-cv2.imshow('image',img2);
-cv2.waitKey() 
-# B2 = bwboundaries(img2);
+count1 = len(contours[0])
+count2 = len(contours2[0])
+temp1 = []
 
-count1 = size(B,1);
-# for i=1:count1
-#     tmp1(i) = size(B{i},1);
-# end
+for x in contours:
+    temp1.append(len(x))
 
-# s = size(B2,1);
-# for i=1:s
-#     tmp2(i) = size(B2{i},1);
-# end
+temp2 = []
+for y in contours:
+    temp2.append(len(y))
 
-# a = size(tmp1(tmp1>3),2);
-# b = size(tmp2(tmp2>3),2);
+temp1a = []
+for x in temp1:
+    if x >3:
+        temp1a.append(x)
 
+temp2a = []
+for y in temp2:
+    if y >3:
+        temp2a.append(y)
 
-# %adjustment based on calibration
-# count1 = 100*count1/s;
-# count2 = 135.5*a/(b);
+a = len(temp1a)
+b= len(temp2a)
+
+count1 = 100*count1/count2;
+count2 = 135.5*a/(b);
+
+print(count2)
 print("Number of Contours found = " + str(len(contours)))
-# cv2.imshow('image',img);
 cv2.imwrite('./storage/app/public/uploads/result.png',img);
 cv2.waitKey() 
 cv2.destroyAllWindows() 
+
+
+
 
 
    
